@@ -6,9 +6,16 @@ import {
   getFamilyMovies,
   getDocumentaryMovies,
 } from '../services/services';
-import {StyleSheet, View, Dimensions, ScrollView, ActivityIndicator} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Dimensions,
+  ScrollView,
+  ActivityIndicator,
+} from 'react-native';
 import {SliderBox} from 'react-native-image-slider-box';
 import List from '../components/List';
+import Error from '../components/Error';
 
 const dimensions = Dimensions.get('screen');
 
@@ -18,7 +25,7 @@ const Home = () => {
   const [popularTvs, setPopularTvs] = useState();
   const [familyMovies, setFamilyMovies] = useState();
   const [documentaryMovies, setDocumentaryMovies] = useState();
-  
+
   const [error, setError] = useState(false);
   const [loaded, setLoaded] = useState(false);
 
@@ -54,58 +61,66 @@ const Home = () => {
           setPopularTvs(popularTvsData);
           setFamilyMovies(familyMoviesData);
           setDocumentaryMovies(documentaryMoviesData);
-          setLoaded(true);
         },
       )
-      .catch(err => {
-        setError(err);
+      .catch(() => {
+        setError(true);
+      })
+      .finally(() => {
+        setLoaded(true);
       });
   }, []);
 
   return (
     <>
-      {loaded && (
-      <ScrollView>
-        {moviesImages && (
-          <View style={styles.sliderContainer}>
-            <SliderBox
-              images={moviesImages}
-              sliderBoxHeight={dimensions.height / 1.5}
-              // circleLoop={true}
-              autoPlay={true}
-              dotStyle={styles.sliderTyle}
-            />
-          </View>
-        )}
+      {loaded && !error &&(
+        <ScrollView>
+          {moviesImages && (
+            <View style={styles.sliderContainer}>
+              <SliderBox
+                images={moviesImages}
+                sliderBoxHeight={dimensions.height / 1.5}
+                // circleLoop={true}
+                autoPlay={true}
+                dotStyle={styles.sliderTyle}
+              />
+            </View>
+          )}
 
-        {popularMovies && (
-          <View style={styles.carousel}>
-            <List title="Popular Movies" content={popularMovies} />
-          </View>
-        )}
+          {popularMovies && (
+            <View style={styles.carousel}>
+              <List title="Popular Movies" content={popularMovies} />
+            </View>
+          )}
 
-        {popularTvs && (
-          <View style={styles.carousel}>
-            <List title="Popular TV shows" content={popularTvs} />
-          </View>
-        )}
+          {popularTvs && (
+            <View style={styles.carousel}>
+              <List title="Popular TV shows" content={popularTvs} />
+            </View>
+          )}
 
-        {familyMovies && (
-          <View style={styles.carousel}>
-            <List title="Family Movies" content={familyMovies} />
-          </View>
-        )}
+          {familyMovies && (
+            <View style={styles.carousel}>
+              <List title="Family Movies" content={familyMovies} />
+            </View>
+          )}
 
-        {documentaryMovies && (
-          <View style={styles.carousel}>
-            <List title="Documentary Movies" content={documentaryMovies} />
-          </View>
-        )}
-      </ScrollView>) }
+          {documentaryMovies && (
+            <View style={styles.carousel}>
+              <List title="Documentary Movies" content={documentaryMovies} />
+            </View>
+          )}
+        </ScrollView>
+      )}
 
       {!loaded && (
-        <ActivityIndicator size={'large'} color='red' style={{ alignItems:'center', justifyContent:'center', flex:1 }} />
+        <ActivityIndicator
+          size={'large'}
+          color="red"
+          style={{alignItems: 'center', justifyContent: 'center', flex: 1}}
+        />
       )}
+      {error && <Error />}
     </>
   );
 };
