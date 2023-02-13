@@ -20,3 +20,9 @@ export const getPopularTv = async () => {
   const response = await axios.get(`${apiUrl}/tv/popular?${apiKey}`);
   return response.data.results;
 };
+
+// Get popular tv series
+export const getFamilyMovies = async () => {
+  const response = await axios.get(`${apiUrl}/discover/movie?${apiKey}&with_genres=10751`);
+  return response.data.results;
+};

@@ -1,12 +1,21 @@
 import React, {useEffect, useState} from 'react';
-import {getPopularMovies, getUpcomingMovies} from '../services/services';
-import {StyleSheet, Text, View, Dimensions} from 'react-native';
+import {
+  getPopularMovies,
+  getUpcomingMovies,
+  getPopularTv,
+  getFamilyMovies,
+} from '../services/services';
+import {StyleSheet, View, Dimensions, ScrollView} from 'react-native';
 import {SliderBox} from 'react-native-image-slider-box';
+import List from '../components/List';
 
 const dimensions = Dimensions.get('screen');
 
 const Home = () => {
   const [moviesImages, setMoviesImages] = useState('');
+  const [popularMovies, setPopularMovies] = useState('');
+  const [popularTvs, setPopularTvs] = useState('');
+  const [familyMovies, setFamilyMovies] = useState('');
   const [error, setError] = useState(false);
 
   useEffect(() => {
@@ -25,25 +34,57 @@ const Home = () => {
         setError(err);
       });
 
-    // getPopularMovies()
-    //   .then(movies => {
-    //     setMovie(movies[0]);
-    //   })
-    //   .catch(err => {
-    //     setError(err);
-    //   });
+    getPopularMovies()
+      .then(movies => {
+        setPopularMovies(movies);
+      })
+      .catch(err => {
+        setError(err);
+      });
+
+    getPopularTv()
+      .then(tvs => {
+        setPopularTvs(tvs);
+      })
+      .catch(err => {
+        setError(err);
+      });
+
+    getFamilyMovies()
+      .then(fmovies => {
+        setFamilyMovies(fmovies);
+      })
+      .catch(err => {
+        setError(err);
+      });
   }, []);
 
   return (
-    <View style={styles.sliderContainer}>
-      <SliderBox
-        images={moviesImages}
-        sliderBoxHeight={dimensions.height / 1.5}
-        circleLoop={true}
-        autoPlay={true}
-        dotSTyle={styles.sliderTyle}
-      />
-    </View>
+    <>
+      <ScrollView>
+        <View style={styles.sliderContainer}>
+          <SliderBox
+            images={moviesImages}
+            sliderBoxHeight={dimensions.height / 1.5}
+            // circleLoop={true}
+            autoPlay={true}
+            dotStyle={styles.sliderTyle}
+          />
+        </View>
+
+        <View style={styles.carousel}>
+          <List title="Popular Movies" content={popularMovies} />
+        </View>
+
+        <View style={styles.carousel}>
+          <List title="Popular TV shows" content={popularTvs} />
+        </View>
+
+        <View style={styles.carousel}>
+          <List title="Family" content={familyMovies} />
+        </View>
+      </ScrollView>
+    </>
   );
 };
 
@@ -52,6 +93,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1,
+  },
+  carousel: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1,
+    // backgroundColor:'gold'
   },
   sliderTyle: {
     height: 0,
