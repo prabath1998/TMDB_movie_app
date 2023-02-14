@@ -34,7 +34,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 20,
     color: Colors.lightGray,
-    paddingBottom: 20,
+    padding:10,
+    paddingBottom: 15
   },
   list: {
     marginTop: 30,
