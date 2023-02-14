@@ -51,5 +51,5 @@ const styles = StyleSheet.create({
   },
 });
 
-Card.propTypes = propTypes;
+// Card.propTypes = propTypes;
 export default Card;

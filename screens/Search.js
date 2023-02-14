@@ -19,8 +19,10 @@ const Search = ({navigation}) => {
   const [error, setError] = useState(false);
 
   const onSubmit = query => {
-    searchMovieOrTv(query, 'movie')
-      .then(data => {
+    Promise.all([searchMovieOrTv(query, 'movie'), searchMovieOrTv(query, 'tv')])
+
+      .then(([movies, tv]) => {
+        const data = [...movies, tv];
         setSearchResults(data);
       })
       .catch(() => {
