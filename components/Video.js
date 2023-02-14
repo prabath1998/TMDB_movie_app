@@ -11,6 +11,7 @@ const Video = ({onClose}) => {
       onEnd={() => {
         onClose();
       }}
+      fullscreenOrientation="all"
       // navigator={navigation}
     />
   );

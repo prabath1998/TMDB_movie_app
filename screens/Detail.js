@@ -89,7 +89,7 @@ const Detail = ({route, navigation}) => {
               </Text>
             </View>
           </ScrollView>
-          <Modal animationType="slide" visible={modalVisible}>
+          <Modal animationType="slide" visible={modalVisible} supportedOrientations={['portrait','landscape']}>
             <View style={styles.videoModel}>
               <Video onClose={() => videoShown()}/>
             </View>
@@ -140,6 +140,7 @@ const styles = StyleSheet.create({
   },
   release: {
     fontWeight: 'bold',
+    padding: 15,
   },
   playButton: {
     position: 'absolute',
