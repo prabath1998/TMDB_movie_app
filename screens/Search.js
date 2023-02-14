@@ -12,6 +12,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {searchMovieOrTv} from '../services/services';
 import Card from '../components/Card';
 import Error from '../components/Error';
+import Colors from '../themes/Colors';
 
 const Search = ({navigation}) => {
   const [text, onChangeText] = useState();
@@ -31,7 +32,7 @@ const Search = ({navigation}) => {
   };
   return (
     <>
-      <SafeAreaView>
+      <SafeAreaView style={styles.safe}>
         <View style={styles.container}>
           <View style={styles.form}>
             <TextInput
@@ -92,14 +93,21 @@ const styles = StyleSheet.create({
     paddingTop: 60,
     flexDirection: 'row',
     alignItems: 'center',
+    // backgroundColor:Colors.background
   },
   form: {
     flexBasis: 'auto',
     flexGrow: 1,
     paddingRight: 8,
+    // backgroundColor:Colors.background
   },
-  searchItems: {},
+  searchItems: {
+    // backgroundColor:Colors.background
+  },
   empty: {},
+  safe:{
+    // backgroundColor:Colors.background
+  }
 });
 
 export default Search;

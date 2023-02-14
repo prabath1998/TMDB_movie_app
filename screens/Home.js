@@ -16,6 +16,7 @@ import {
 import {SliderBox} from 'react-native-image-slider-box';
 import List from '../components/List';
 import Error from '../components/Error';
+import Colors from '../themes/Colors';
 
 const dimensions = Dimensions.get('screen');
 
@@ -129,13 +130,14 @@ const styles = StyleSheet.create({
   sliderContainer: {
     alignItems: 'center',
     justifyContent: 'center',
+    
     flex: 1,
   },
   carousel: {
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1,
-    // backgroundColor:'gold'
+    backgroundColor:Colors.background,
   },
   sliderTyle: {
     height: 0,

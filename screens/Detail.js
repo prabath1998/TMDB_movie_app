@@ -16,6 +16,7 @@ import dateFormat from 'dateformat';
 import PlayButton from '../components/PlayButton';
 import VideoPlayer from 'react-native-video-controls';
 import Video from '../components/Video';
+import Colors from '../themes/Colors';
 
 const placeholderImage = require('../assets/images/no-image.jpg');
 const height = Dimensions.get('screen').height;
@@ -117,12 +118,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 25,
     marginBottom: 10,
-    color: 'black',
+    color: Colors.white,
   },
   container: {
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
+    backgroundColor:Colors.background
   },
   genresContainer: {
     flexDirection: 'row',
@@ -133,14 +135,16 @@ const styles = StyleSheet.create({
   genresText: {
     marginRight: 10,
     fontWeight: 'bold',
-    color: 'black',
+    color: Colors.lightGray,
   },
   overview: {
     padding: 15,
+    color: Colors.lightGray,
   },
   release: {
     fontWeight: 'bold',
     padding: 15,
+    color: Colors.lightGray,
   },
   playButton: {
     position: 'absolute',
