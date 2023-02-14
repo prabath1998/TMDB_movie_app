@@ -21,15 +21,21 @@ export const getPopularTv = async () => {
   return response.data.results;
 };
 
-// Get popular tv series
+// Get family tv series
 export const getFamilyMovies = async () => {
   const response = await axios.get(`${apiUrl}/discover/movie?${apiKey}&with_genres=10751`);
   return response.data.results;
 };
 
 
-// Get documentary tv series
+// Get documentary movies
 export const getDocumentaryMovies = async () => {
   const response = await axios.get(`${apiUrl}/discover/movie?${apiKey}&with_genres=99`);
   return response.data.results;
+};
+
+// Get movieDetails
+export const getMovie = async (id) => {
+  const response = await axios.get(`${apiUrl}/movie/${id}?${apiKey}`);
+  return response.data;
 };
